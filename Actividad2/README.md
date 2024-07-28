@@ -48,6 +48,6 @@ chmod +x /ruta/al/script/actividad2.sh
 sudo apt-get install jq
 ```
 
-##Nota
+## Nota
 
-* El script creará un archivo de log con el nombre saludos_<fecha>.log en la misma ubicación donde se encuentra el script.
+* El script creará un archivo de log con el nombre saludos_fecha.log en la misma ubicación donde se encuentra el script.
