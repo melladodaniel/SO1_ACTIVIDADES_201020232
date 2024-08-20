@@ -1,0 +1,10 @@
+[Unit]
+Description=Servicio de prueba actividad 4
+
+[Service]
+Type=simple
+ExecStart=/home/daniel/Documentos/Sistemas_Operativos_1/SO1_ACTIVIDADES_201020232/Actividad4/script.sh # Ruta del script
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
