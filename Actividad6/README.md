@@ -27,17 +27,17 @@ El programa crea **8 procesos en total** (incluyendo el proceso inicial).
 
 ### Explicación paso a paso:
 
-1. **Proceso inicial (P0)**: Comienza ejecutándose el proceso original que se crea cuando el programa inicia.
+**Proceso inicial (P0)**: Comienza ejecutándose el proceso original que se crea cuando el programa inicia.
 
-2. **Primera llamada a `fork()`**:
+**Primera llamada a `fork()`**:
    - La primera llamada a `fork()` crea un proceso hijo (P1).
    - Ahora tenemos 2 procesos ejecutando el mismo código: el proceso original (P0) y el nuevo proceso hijo (P1).
 
-3. **Segunda llamada a `fork()`**:
+**Segunda llamada a `fork()`**:
    - Ambos procesos (P0 y P1) ejecutan la segunda llamada a `fork()`, lo que genera 2 nuevos procesos: uno desde P0 (P2) y otro desde P1 (P3).
    - Ahora tenemos 4 procesos: P0, P1, P2 y P3.
 
-4. **Tercera llamada a `fork()`**:
+**Tercera llamada a `fork()`**:
    - Todos los 4 procesos (P0, P1, P2 y P3) ejecutan la tercera llamada a `fork()`, generando 4 nuevos procesos: uno desde P0 (P4), otro desde P1 (P5), otro desde P2 (P6) y otro desde P3 (P7).
    - En este punto, hay un total de 8 procesos: P0, P1, P2, P3, P4, P5, P6 y P7.
 
@@ -80,10 +80,10 @@ int main() {
 
 ### Explicación:
 
-1. El proceso padre llama a `fork()` para crear un proceso hijo.
-2. El proceso hijo finaliza inmediatamente con `exit(0)`, lo que lo deja en estado zombie porque el proceso padre no recoge su estado de inmediato.
-3. El proceso padre imprime el PID del hijo y luego duerme durante 60 segundos usando `sleep(60)`. Durante este tiempo, el hijo queda en estado zombie.
-4. Después de 60 segundos, el padre recoge el estado del hijo con `wait(NULL)`, eliminando el proceso zombie.
+- El proceso padre llama a `fork()` para crear un proceso hijo.
+- El proceso hijo finaliza inmediatamente con `exit(0)`, lo que lo deja en estado zombie porque el proceso padre no recoge su estado de inmediato.
+- El proceso padre imprime el PID del hijo y luego duerme durante 60 segundos usando `sleep(60)`. Durante este tiempo, el hijo queda en estado zombie.
+- Después de 60 segundos, el padre recoge el estado del hijo con `wait(NULL)`, eliminando el proceso zombie.
 
 3. Usando el siguiente código como referencia, completar el programa para que sea ejecutable y responder las siguientes preguntas:
 * ¿Cuántos procesos únicos son creados?
@@ -161,17 +161,17 @@ int main() {
 
 ### Diagrama de creación de procesos:
 
-1. Proceso inicial (P0).
-2. `fork()` (en el proceso inicial): Crea el proceso hijo (P1).
+Proceso inicial (P0).
+`fork()` (en el proceso inicial): Crea el proceso hijo (P1).
    - Ahora tenemos dos procesos: P0, P1.
    
-3. `fork()` (dentro del proceso hijo P1): El proceso hijo P1 crea otro proceso (P2).
+`fork()` (dentro del proceso hijo P1): El proceso hijo P1 crea otro proceso (P2).
    - Ahora tenemos tres procesos: P0, P1, P2.
    
-4. `pthread_create()` (en el proceso P1): Solo el proceso P1 crea un hilo (T1).
+`pthread_create()` (en el proceso P1): Solo el proceso P1 crea un hilo (T1).
    - Proceso P1 ahora tiene un hilo (T1).
    
-5. `fork()` (se ejecuta en P0, P1, y P2): Cada uno de los tres procesos llama a `fork()`, creando un nuevo proceso para cada uno.
+`fork()` (se ejecuta en P0, P1, y P2): Cada uno de los tres procesos llama a `fork()`, creando un nuevo proceso para cada uno.
    - P0 crea P3, P1 crea P4, P2 crea P5.
    - En este punto tenemos seis procesos: P0, P1, P2, P3, P4, P5.
    
